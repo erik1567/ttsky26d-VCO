@@ -25,8 +25,8 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
+  ui[0]: "bit0"
+  ui[1]: "bit1"
   ui[2]: ""
   ui[3]: ""
   ui[4]: ""
@@ -35,7 +35,7 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: ""
+  uo[0]: "out"
   uo[1]: ""
   uo[2]: ""
   uo[3]: ""
@@ -55,7 +55,7 @@ pinout:
   uio[7]: ""
 
   # Analog pins - make sure to also set "analog_pins" above, else the pins won't be connected
-  ua[0]: ""
+  ua[0]: "Vin"
   ua[1]: ""
   ua[2]: ""
   ua[3]: ""
