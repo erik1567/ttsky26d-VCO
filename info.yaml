@@ -3,7 +3,7 @@ project:
   title:        "Digitally Band-Switched VCO"      # Project title
   author:       "Paulcsek Erik"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "Digitally band-switched VCO with a 3 decade range, covering ~100k-100M range"      # One line description of what your project does
+  description:  "Ring VCO with 2-bit band switching and analog tuning, about 100 kHz to 100 MHz"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -25,8 +25,8 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "bit0"
-  ui[1]: "bit1"
+  ui[0]: "BIT0 (band select)"
+  ui[1]: "BIT1 (band select)"
   ui[2]: ""
   ui[3]: ""
   ui[4]: ""
@@ -35,7 +35,7 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: "out"
+  uo[0]: "FOUT (VCO frequency / 4)"
   uo[1]: ""
   uo[2]: ""
   uo[3]: ""
@@ -55,7 +55,7 @@ pinout:
   uio[7]: ""
 
   # Analog pins - make sure to also set "analog_pins" above, else the pins won't be connected
-  ua[0]: "Vin"
+  ua[0]: "VIN (tuning voltage, 0-1.8 V)"
   ua[1]: ""
   ua[2]: ""
   ua[3]: ""

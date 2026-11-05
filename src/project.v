@@ -1,11 +1,13 @@
 /*
- * Copyright (c) 2024 Your Name
+ * Copyright (c) 2026 Paulcsek Erik
  * SPDX-License-Identifier: Apache-2.0
  */
 
 `default_nettype none
 
-module tt_um_example (
+// Blackbox stub for the analog layout in gds/tt_um_VCOerik1567.gds.
+// Used pins: ua[0] = VIN, ui_in[0] = BIT0, ui_in[1] = BIT1, uo_out[0] = FOUT.
+module tt_um_VCOerik1567 (
     input  wire       VGND,
     input  wire       VDPWR,    // 1.8v power supply
 //    input  wire       VAPWR,    // 3.3v power supply
