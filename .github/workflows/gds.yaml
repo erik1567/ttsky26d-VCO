@@ -30,7 +30,36 @@ jobs:
   precheck:
     needs: gds
     runs-on: ubuntu-24.04
+    env:
+      # Must match PDK_ROOT / PDK_VERSION set inside tt-gds-action/precheck@ttsky26d
+      PDK_ROOT: /home/runner/pdk
+      PDK_VERSION: 0536d02d875c8f67dd7cca3902ac457e62f20005
     steps:
+      # The precheck action downloads the PDK in a single attempt and fails on any
+      # network timeout. Fetch it here with retries and the same cache key, so the
+      # action finds it on disk and skips the download.
+      - name: Restore sky130A PDK cache
+        id: pdk-cache
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PDK_ROOT }}
+          key: ${{ runner.os }}-pdk-sky130A-${{ env.PDK_VERSION }}
+
+      - name: Download sky130A PDK (with retries)
+        if: steps.pdk-cache.outputs.cache-hit != 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PIP_BREAK_SYSTEM_PACKAGES: 1
+        run: |
+          pip3 install "ciel==3.2.0"
+          for attempt in 1 2 3 4 5 6; do
+            echo "PDK download attempt $attempt"
+            if ciel enable --pdk sky130A "$PDK_VERSION"; then exit 0; fi
+            sleep $((attempt * 20))
+          done
+          echo "::error::PDK download failed after 6 attempts"
+          exit 1
+
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@ttsky26d
 
